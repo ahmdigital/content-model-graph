@@ -4,8 +4,8 @@ Graph your Sanity.io content model straight in your Studio using this tool
 
 ## Installation
 
-`npm install @ahmdigital/content-model-graph`
-open your sanity.json and add it to your `plugins`
+1. `npm install @ahmdigital/content-model-graph`
+2. open your sanity.json and add it to your `plugins`
 
 ```
   "plugins": [
