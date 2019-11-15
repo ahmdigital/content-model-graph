@@ -42,7 +42,7 @@
   },
   "peerDependencies": {
     "@sanity/base": "^0.135.0 || ^0.144.0",
-    "@sanity/components": "^0.135.0",
+    "@sanity/components": "^0.135.0 || ^0.144.0",
     "@sanity/core": "^0.135.0 || ^0.144.0"
   },
   "devDependencies": {
