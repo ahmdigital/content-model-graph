@@ -25,7 +25,6 @@ const removeExplicitDimensions = svgHtml =>
 
 const ContentModelGraph = ({ Switch, types }) => {
   const viz = new Viz({ Module, render });
-  console.log('viz', viz);
   const [svgHtml, setSvgHtml] = useState('');
   const [isShowingFields, setIsShowingFields] = useState(false);
 
