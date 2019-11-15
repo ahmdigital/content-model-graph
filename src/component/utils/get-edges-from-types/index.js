@@ -4,7 +4,21 @@ import getNameForType from '../get-name-for-type';
 
 const toParameter = (key, value) => (value ? `${key}="${value}"` : '');
 
-const builtInFieldTypes = ['array', 'block', 'datetime', 'image', 'reference', 'slug', 'string', 'url'];
+const builtInFieldTypes = [
+  'array',
+  'block',
+  'boolean',
+  'datetime',
+  'file',
+  'geopoint',
+  'image',
+  'number',
+  'reference',
+  'slug',
+  'string',
+  'text',
+  'url',
+];
 
 const buildEdge = ({ arrowHead, from, label, to }) => {
   if (_.includes(builtInFieldTypes, to)) {
