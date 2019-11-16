@@ -31,7 +31,7 @@ const getUnusualInlinedFieldType = ({ field, from }) =>
   buildEdge({ arrowHead: 'dot', from, label: undefined, to: field.type });
 
 const getReferences = ({ arrowHead, from, label, values }) =>
-  _.map(values, ({ type: to }) => buildEdge({ arrowHead, from, label, to }));
+  _.map(_.isPlainObject(values) ? [values] : values, ({ type: to }) => buildEdge({ arrowHead, from, label, to }));
 
 const buildFieldToEdges = fromType => field => {
   const label = getNameForType(field);
