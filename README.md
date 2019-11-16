@@ -15,8 +15,7 @@ Graph your Sanity.io content model straight in your Studio using this tool
 ![Screen Shot 2](https://user-images.githubusercontent.com/4197647/68980734-6e0fe800-0855-11ea-8ec0-d7948ef46014.png)
 
 ### Sanity's Product schema
-!
-[Screen Shot 2019-11-16 at 11 52 12 pm](https://user-images.githubusercontent.com/4197647/68993452-77886700-08cc-11ea-8426-02447b894b9f.png)
+![Screen Shot 2019-11-16 at 11 52 12 pm](https://user-images.githubusercontent.com/4197647/68993452-77886700-08cc-11ea-8426-02447b894b9f.png)
 ![Screen Shot 2019-11-16 at 11 52 00 pm](https://user-images.githubusercontent.com/4197647/68993455-77886700-08cc-11ea-8a5c-1653d44fee07.png)
 
 ## Contributing
