@@ -24,7 +24,7 @@ const buildEdge = ({ arrowHead, from, label, to }) => {
   if (_.includes(builtInFieldTypes, to)) {
     return null;
   }
-  return `${from} -> ${`${to}:root`} [${[toParameter('label', label), toParameter('arrowhead', arrowHead)].join(' ')}]`;
+  return `"${from}" -> "${`${to}:root`}" [${[toParameter('label', label), toParameter('arrowhead', arrowHead)].join(' ')}]`;
 };
 
 const getUnusualInlinedFieldType = ({ field, from }) =>
