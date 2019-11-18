@@ -24,7 +24,7 @@ const buildEdge = ({ arrowHead, from, label, to }) => {
   if (_.includes(builtInFieldTypes, to)) {
     return null;
   }
-  return `"${from}" -> "${`${to}:root`}" [${[toParameter('label', label), toParameter('arrowhead', arrowHead)].join(' ')}]`;
+  return `${from} -> ${`"${to}":root`} [${[toParameter('label', label), toParameter('arrowhead', arrowHead)].join(' ')}]`;
 };
 
 const getUnusualInlinedFieldType = ({ field, from }) =>
@@ -35,7 +35,7 @@ const getReferences = ({ arrowHead, from, label, values }) =>
 
 const buildFieldToEdges = fromType => field => {
   const label = getNameForType(field);
-  const from = `${fromType}:${field.name}`;
+  const from = `"${fromType}":${field.name}`;
   return [
     getUnusualInlinedFieldType({ field, from }),
     getReferences({ arrowHead: 'tee', from, label, values: field.to }),
