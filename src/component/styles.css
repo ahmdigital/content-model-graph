@@ -12,3 +12,10 @@ svg {
   display: block;
   max-width: 1500px;
 }
+
+.interactiveComponents{
+  display: inline-flex;
+}
+  .interactiveComponents > *{
+    margin: 0 1rem;
+  }
