@@ -7,6 +7,6 @@ it('transforms types to edges', () => {
     '"memberPerk":offeredBy -> "organization":root [label="Offered By" arrowhead="tee"]',
     '"memberPerk":urlObject -> "urlObject":root [ arrowhead="dot"]',
     '"memberPerk":discountCodes -> "discountCode":root [label="Discount Codes" arrowhead="crow"]',
-    '"memberPerk":discountCodeReferences -> "discountCode":root [label="Discount Code References" arrowhead="crow"]'
+    '"memberPerk":discountCodeReferences -> "discountCode":root [label="Discount Code References" arrowhead="crow"]',
   ]);
 });
