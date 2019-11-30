@@ -24,6 +24,16 @@ export const types = [
         ],
         type: 'array',
       },
+      {
+        name: "discountCodeReferences",
+        type: "array",
+        of: [
+          {
+            type: "reference",
+            to: [{ type: "discountCode" }],
+          },
+        ],
+      },
     ],
     name: 'memberPerk',
     type: 'document',
