@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { act } from 'react-test-utils';
 import { mount } from 'enzyme';
 import React from 'react';
@@ -23,6 +24,5 @@ it('transforms types to edges', async () => {
   mMock.mockReturnValue(promise);
   const wrapper = mount(<ContentModelGraph types={types} Switch={SwitchMock} />);
   act(await promise.resolve('<svg/>'));
-  console.log(wrapper.debug());
   expect(wrapper).toMatchSnapshot();
 });

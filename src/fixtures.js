@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const types = [
   {
     fields: [
@@ -25,14 +26,14 @@ export const types = [
         type: 'array',
       },
       {
-        name: "discountCodeReferences",
-        type: "array",
+        name: 'discountCodeReferences',
         of: [
           {
-            type: "reference",
-            to: [{ type: "discountCode" }],
+            to: [{ type: 'discountCode' }],
+            type: 'reference',
           },
         ],
+        type: 'array',
       },
     ],
     name: 'memberPerk',

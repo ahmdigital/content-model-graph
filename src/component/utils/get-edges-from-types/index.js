@@ -17,17 +17,16 @@ const builtInFieldTypes = [
   'slug',
   'string',
   'text',
-  'url'
+  'url',
 ];
 
 const buildEdge = ({ arrowHead, from, label, to }) => {
   if (_.includes(builtInFieldTypes, to)) {
     return null;
   }
-  return `${from} -> ${`"${to}":root`} [${[
-    toParameter('label', label),
-    toParameter('arrowhead', arrowHead)
-  ].join(' ')}]`;
+  return `${from} -> ${`"${to}":root`} [${[toParameter('label', label), toParameter('arrowhead', arrowHead)].join(
+    ' ',
+  )}]`;
 };
 
 const getUnusualInlinedFieldType = ({ field, from }) =>
@@ -36,9 +35,7 @@ const getUnusualInlinedFieldType = ({ field, from }) =>
 const getReferences = ({ arrowHead, from, label, values }) =>
   _.map(_.isPlainObject(values) ? [values] : values, ({ type, to }) => {
     if (type === 'reference') {
-      return _.map(to, toItem =>
-        getReferences({ arrowHead, from, label, values: { type: toItem.type } })
-      );
+      return _.map(to, toItem => getReferences({ arrowHead, from, label, values: { type: toItem.type } }));
     }
     return buildEdge({ arrowHead, from, label, to: type });
   });
@@ -49,7 +46,7 @@ const buildFieldToEdges = fromType => field => {
   return [
     getUnusualInlinedFieldType({ field, from }),
     getReferences({ arrowHead: 'tee', from, label, values: field.to }),
-    getReferences({ arrowHead: 'crow', from, label, values: field.of })
+    getReferences({ arrowHead: 'crow', from, label, values: field.of }),
   ];
 };
 
