@@ -20,6 +20,8 @@ const builtInFieldTypes = [
   'url',
 ];
 
+const ensureArray = values => (_.isArray(values) ? values : [values]);
+
 const buildEdge = ({ arrowHead, from, label, to }) => {
   if (_.includes(builtInFieldTypes, to)) {
     return null;
@@ -33,9 +35,9 @@ const getUnusualInlinedFieldType = ({ field, from }) =>
   buildEdge({ arrowHead: 'dot', from, label: undefined, to: field.type });
 
 const getReferences = ({ arrowHead, from, label, values }) =>
-  _.map(_.isPlainObject(values) ? [values] : values, ({ type, to }) => {
+  _.map(ensureArray(values), ({ type, to }) => {
     if (type === 'reference') {
-      return _.map(to, toItem => getReferences({ arrowHead, from, label, values: { type: toItem.type } }));
+      return _.map(ensureArray(to), toItem => getReferences({ arrowHead, from, label, values: { type: toItem.type } }));
     }
     return buildEdge({ arrowHead, from, label, to: type });
   });
