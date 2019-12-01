@@ -1,8 +1,8 @@
+/* eslint-disable import/no-unresolved */
 import { FaSitemap } from 'react-icons/fa';
+import Button from 'part:@sanity/components/buttons/default';
 import React from 'react';
-// eslint-disable-next-line import/no-unresolved
 import schema from 'part:@sanity/base/schema';
-// eslint-disable-next-line import/no-unresolved
 import Switch from 'part:@sanity/components/toggles/switch';
 
 import ContentModelGraph from './component';
@@ -10,7 +10,7 @@ import ContentModelGraph from './component';
 // eslint-disable-next-line no-underscore-dangle
 const { types } = schema._source;
 
-const boundContentModelGraph = <ContentModelGraph types={types} Switch={Switch} />;
+const boundContentModelGraph = <ContentModelGraph Button={Button} types={types} Switch={Switch} />;
 
 export default {
   component: () => boundContentModelGraph,
