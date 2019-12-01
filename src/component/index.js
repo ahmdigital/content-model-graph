@@ -13,7 +13,7 @@ const newLine = '\n';
 
 const header = [
   'strict digraph ContentModel {',
-  'node [fontsize=16 fontname="inherit"];',
+  'node [fontname="inherit"];',
   'edge [fontname="inherit"];',
   'rankdir="LR"',
 ];
