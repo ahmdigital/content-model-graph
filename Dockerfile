@@ -4,8 +4,8 @@ RUN mkdir -p /var/app
 WORKDIR /var/app
 
 COPY .eslintrc /var/app
-COPY package.json /var/app
 COPY package-lock.json /var/app
+COPY package.json /var/app
 
 RUN npm install
 
