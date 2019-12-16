@@ -37,7 +37,9 @@ const getUnusualInlinedFieldType = ({ field, from }) =>
 const getReferences = ({ arrowHead, from, label, values }) =>
   _.map(_.compact(ensureArray(values)), ({ type, to }) => {
     if (type === 'reference') {
-      return _.map(_.compact(ensureArray(to)), toItem => getReferences({ arrowHead, from, label, values: { type: toItem.type } }));
+      return _.map(_.compact(ensureArray(to)), toItem =>
+        getReferences({ arrowHead, from, label, values: { type: toItem.type } }),
+      );
     }
     return buildEdge({ arrowHead, from, label, to: type });
   });

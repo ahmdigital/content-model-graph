@@ -13,11 +13,9 @@ const SwitchMock = () => <div />;
 jest.mock('viz.js'); // this happens automatically with automocking
 
 const mMock = jest.fn();
-Viz.mockImplementation(() => {
-  return {
-    renderString: mMock,
-  };
-});
+Viz.mockImplementation(() => ({
+  renderString: mMock,
+}));
 
 it('transforms types to edges', async () => {
   const promise = Promise;
