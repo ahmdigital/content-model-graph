@@ -1,0 +1,5 @@
+content-model-graph:
+  build:
+    image: content-model-graph
+    dockerfile: Dockerfile
+  cached: true

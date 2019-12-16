@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import { FaSitemap } from 'react-icons/fa';
 import Button from 'part:@sanity/components/buttons/default';
 import React from 'react';
