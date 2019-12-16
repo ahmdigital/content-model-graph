@@ -1,0 +1,3 @@
+- name: Linting
+  service: content-model-graph
+  command: npm run lint
