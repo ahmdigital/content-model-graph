@@ -47,7 +47,7 @@
     "@sanity/components": "^0.145.0 || ^0.146.0 || ^0.147.0 || ^1.0.0"
   },
   "devDependencies": {
-    "@ahmdigital/eslint-config": "3.1.2",
+    "@ahmdigital/eslint-config": "3.1.3",
     "babel-cli": "6.26.0",
     "babel-eslint": "10.1.0",
     "babel-preset-es2015": "6.24.1",
