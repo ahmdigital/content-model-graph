@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 
 const footer = ['}'];
 
-const removeExplicitDimensions = svgHtml =>
+const removeExplicitDimensions = (svgHtml) =>
   _.replace(svgHtml, /width="(.*?)" height="(.*?)"/, 'width="100%" height="100%"');
 
 const handleSave = ({ content, fileType, mimeType }) => {
@@ -55,10 +55,7 @@ const ContentModelGraph = ({ Button, Switch, types }) => {
 
   const graphVizString = _.invokeMap(allItems, 'join', newLine).join(newLine);
 
-  viz
-    .renderString(graphVizString)
-    .then(setSvgString)
-    .catch(setSvgString);
+  viz.renderString(graphVizString).then(setSvgString).catch(setSvgString);
 
   const fileDefinitions = [
     { content: svgString, fileType: 'svg', mimeType: 'image/svg+xml' },
@@ -68,7 +65,7 @@ const ContentModelGraph = ({ Button, Switch, types }) => {
     <Container>
       <h1>Content Model Graph</h1>
       <Switch checked={isShowingFields} label="Show fields" onChange={() => setIsShowingFields(!isShowingFields)} />
-      {_.map(fileDefinitions, item => (
+      {_.map(fileDefinitions, (item) => (
         <Button type="button" onClick={() => handleSave(item)}>
           Save .{item.fileType}
         </Button>
