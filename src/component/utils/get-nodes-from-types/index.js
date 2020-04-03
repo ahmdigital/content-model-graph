@@ -2,10 +2,10 @@ import _ from 'lodash';
 
 import getNameForType from '../get-name-for-type';
 
-const typeToNode = isShowingFields => type =>
+const typeToNode = (isShowingFields) => (type) =>
   `"${type.name}" [ label ="${[
     `<root> ${getNameForType(type)}`,
-    ...(isShowingFields ? _.map(type.fields, field => `<${field.name}> ${getNameForType(field)}`) : []),
+    ...(isShowingFields ? _.map(type.fields, (field) => `<${field.name}> ${getNameForType(field)}`) : []),
   ].join('|')}" shape="record" style=rounded]`;
 
 /**

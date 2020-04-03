@@ -20,7 +20,7 @@ const builtInFieldTypes = [
   'url',
 ];
 
-const ensureArray = values => (_.isArray(values) ? values : [values]);
+const ensureArray = (values) => (_.isArray(values) ? values : [values]);
 
 const buildEdge = ({ arrowHead, from, label, to }) => {
   if (_.includes(builtInFieldTypes, to)) {
@@ -37,14 +37,14 @@ const getUnusualInlinedFieldType = ({ field, from }) =>
 const getReferences = ({ arrowHead, from, label, values }) =>
   _.map(_.compact(ensureArray(values)), ({ type, to }) => {
     if (type === 'reference') {
-      return _.map(_.compact(ensureArray(to)), toItem =>
+      return _.map(_.compact(ensureArray(to)), (toItem) =>
         getReferences({ arrowHead, from, label, values: { type: toItem.type } }),
       );
     }
     return buildEdge({ arrowHead, from, label, to: type });
   });
 
-const buildFieldToEdges = fromType => field => {
+const buildFieldToEdges = (fromType) => (field) => {
   const label = getNameForType(field);
   const from = `"${fromType}":${field.name}`;
   return [
@@ -54,14 +54,8 @@ const buildFieldToEdges = fromType => field => {
   ];
 };
 
-const typeToEdges = type => _.map(type.fields, buildFieldToEdges(type.name));
+const typeToEdges = (type) => _.map(type.fields, buildFieldToEdges(type.name));
 
-const getEdgesFromTypes = types =>
-  _(types)
-    .map(typeToEdges)
-    .flattenDeep()
-    .compact()
-    .uniq()
-    .value();
+const getEdgesFromTypes = (types) => _(types).map(typeToEdges).flattenDeep().compact().uniq().value();
 
 export default getEdgesFromTypes;

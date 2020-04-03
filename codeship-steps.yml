@@ -1,3 +1,7 @@
-- name: Linting
-  service: content-model-graph
-  command: npm run lint
+- name: Lint & Test
+  type: parallel
+  steps:
+  - service: build-service
+    command: npm run lint
+  - service: build-service
+    command: npm run test --nowatch

@@ -1,4 +1,4 @@
-content-model-graph:
+build-service:
   build:
     image: content-model-graph
     dockerfile: Dockerfile
