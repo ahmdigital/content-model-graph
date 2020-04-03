@@ -3,11 +3,11 @@ import _ from 'lodash';
 import FileSaver from 'file-saver';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import Viz from 'viz.js';
 
 import getEdgesFromTypes from './utils/get-edges-from-types';
 import getNodesFromTypes from './utils/get-nodes-from-types';
-import styles from './styles.css';
 
 const newLine = '\n';
 
@@ -17,6 +17,21 @@ const header = [
   'edge [fontname="inherit"];',
   'rankdir="LR"',
 ];
+
+const Container = styled.div`
+  background-color: white;
+  padding: 1rem;
+
+  svg {
+    display: block;
+    max-width: 1500px;
+  }
+`;
+
+const Wrapper = styled.div`
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+`;
 
 const footer = ['}'];
 
@@ -50,7 +65,7 @@ const ContentModelGraph = ({ Button, Switch, types }) => {
     { content: graphVizString, fileType: 'gv', mimeType: 'application/octet-stream' },
   ];
   return (
-    <div className={styles.container}>
+    <Container>
       <h1>Content Model Graph</h1>
       <Switch checked={isShowingFields} label="Show fields" onChange={() => setIsShowingFields(!isShowingFields)} />
       {_.map(fileDefinitions, item => (
@@ -58,14 +73,13 @@ const ContentModelGraph = ({ Button, Switch, types }) => {
           Save .{item.fileType}
         </Button>
       ))}
-      <div
-        className={styles.wrapper}
+      <Wrapper
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: removeExplicitDimensions(svgString),
         }}
       />
-    </div>
+    </Container>
   );
 };
 
