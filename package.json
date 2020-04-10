@@ -43,7 +43,7 @@
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-icons": "3.9.0",
-    "styled-components": "5.0.1",
+    "styled-components": "5.1.0",
     "viz.js": "2.1.2"
   },
   "peerDependencies": {
