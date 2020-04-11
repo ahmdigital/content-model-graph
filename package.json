@@ -36,9 +36,9 @@
   },
   "dependencies": {
     "@babel/preset-react": "7.9.4",
-    "babel-jest": "25.2.6",
+    "babel-jest": "25.3.0",
     "file-saver": "2.0.2",
-    "jest": "25.2.7",
+    "jest": "25.3.0",
     "lodash": "4.17.15",
     "prop-types": "15.7.2",
     "react": "16.13.1",
