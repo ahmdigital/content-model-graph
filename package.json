@@ -42,7 +42,7 @@
     "lodash": "4.17.15",
     "prop-types": "15.7.2",
     "react": "16.13.1",
-    "react-icons": "3.9.0",
+    "react-icons": "3.10.0",
     "styled-components": "5.1.0",
     "viz.js": "2.1.2"
   },
