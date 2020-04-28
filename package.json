@@ -51,7 +51,7 @@
     "@sanity/components": "^1.0.0"
   },
   "devDependencies": {
-    "@ahmdigital/eslint-config": "3.1.20",
+    "@ahmdigital/eslint-config": "3.1.24",
     "@babel/preset-env": "7.9.5",
     "babel-cli": "6.26.0",
     "babel-eslint": "10.1.0",
