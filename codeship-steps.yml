@@ -1,7 +1,7 @@
-- name: Lint & Test
+- name: Lint, Build #, Test
   type: parallel
+  service: build-service
   steps:
-  - service: build-service
-    command: npm run lint
-  - service: build-service
-    command: npm run test --nowatch
+  - command: npm run lint
+  # - command: npm t -- --coverage
+  - command: npm run build
