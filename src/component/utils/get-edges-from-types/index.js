@@ -44,8 +44,8 @@ const getReferences = ({ arrowHead, from, label, values }) =>
     return buildEdge({ arrowHead, from, label, to: type });
   });
 
-const buildFieldToEdges = (fromType) => (field) => {
-  const label = getNameForType(field);
+const buildFieldToEdges = ({ fromType, isShowingEdgeLabels }) => (field) => {
+  const label = isShowingEdgeLabels ? getNameForType(field) : undefined;
   const from = `"${fromType}":${field.name}`;
   return [
     getUnusualInlinedFieldType({ field, from }),
@@ -54,8 +54,15 @@ const buildFieldToEdges = (fromType) => (field) => {
   ];
 };
 
-const typeToEdges = (type) => _.map(type.fields, buildFieldToEdges(type.name));
+const typeToEdges = ({ isShowingEdgeLabels, type }) =>
+  _.map(type.fields, buildFieldToEdges({ fromType: type.name, isShowingEdgeLabels }));
 
-const getEdgesFromTypes = (types) => _(types).map(typeToEdges).flattenDeep().compact().uniq().value();
+const getEdgesFromTypes = (types, isShowingEdgeLabels) =>
+  _(types)
+    .map((type) => typeToEdges({ isShowingEdgeLabels, type }))
+    .flattenDeep()
+    .compact()
+    .uniq()
+    .value();
 
 export default getEdgesFromTypes;
