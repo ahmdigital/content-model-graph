@@ -16,6 +16,7 @@ const header = [
   'node [fontname="inherit"];',
   'edge [fontname="inherit"];',
   'rankdir="LR"',
+  'concentrate="true"',
 ];
 
 const Container = styled.div`
@@ -47,8 +48,9 @@ const ContentModelGraph = ({ Button, Switch, types }) => {
   const viz = new Viz({ Module, render });
   const [svgString, setSvgString] = useState('');
   const [isShowingFields, setIsShowingFields] = useState(false);
+  const [isShowingEdgeLabels, setIsShowingEdgeLabels] = useState(false);
 
-  const edges = getEdgesFromTypes(types);
+  const edges = getEdgesFromTypes(types, isShowingEdgeLabels);
   const nodes = getNodesFromTypes(types, isShowingFields);
 
   const allItems = [header, edges, nodes, footer];
@@ -65,8 +67,13 @@ const ContentModelGraph = ({ Button, Switch, types }) => {
     <Container>
       <h1>Content Model Graph</h1>
       <Switch checked={isShowingFields} label="Show fields" onChange={() => setIsShowingFields(!isShowingFields)} />
+      <Switch
+        checked={isShowingEdgeLabels}
+        label="Show edge labels"
+        onChange={() => setIsShowingEdgeLabels(!isShowingEdgeLabels)}
+      />
       {_.map(fileDefinitions, (item) => (
-        <Button type="button" onClick={() => handleSave(item)}>
+        <Button key={item.fileType} type="button" onClick={() => handleSave(item)}>
           Save .{item.fileType}
         </Button>
       ))}
