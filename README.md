@@ -7,7 +7,7 @@ Graph your Sanity.io content model straight in your Studio using this tool
 1. `sanity install content-model-graph`
 2. There's no step 2.
 
-## Examples
+## Examples (need updating, it looks nicer now)
 
 ### Sanity's Movie schema
 
