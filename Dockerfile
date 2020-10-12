@@ -1,12 +1,11 @@
 FROM node:12.18.4
 
-WORKDIR /var/app
+WORKDIR /root/app
 
-COPY .eslintrc .
-COPY package-lock.json .
-COPY package.json .
+RUN npm i -g npm@latest
+COPY package.json package-lock.json ./
+RUN npm ci --quiet --no-optional && \
+  npm cache clean --force
 
-RUN npm install
-
+COPY .eslintrc .babelrc ./
 COPY src ./src
-COPY .babelrc .
