@@ -1,0 +1,8 @@
+*.aes
+*.decrypted
+codeship_deploy_key*
+codeship.env
+.dockerignore
+Dockerfile
+codeship*
+*.encrypted
