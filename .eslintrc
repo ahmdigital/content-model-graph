@@ -1,3 +1,6 @@
 {
-  "extends": "@ahmdigital/eslint-config/react-config"
+  "extends": "@ahmdigital/eslint-config/react-config",
+  "rules": {
+    "jest/no-deprecated-functions": "off"
+  }
 }
