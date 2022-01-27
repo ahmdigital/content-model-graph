@@ -45,8 +45,8 @@
     "viz.js": "2.1.2"
   },
   "peerDependencies": {
-    "@sanity/base": "^1.0.0",
-    "@sanity/components": "^1.0.0"
+    "@sanity/base": "^1.0.0 || ^2.0.0",
+    "@sanity/components": "^1.0.0 || ^2.0.0"
   },
   "devDependencies": {
     "@ahmdigital/eslint-config": "4.0.10",
