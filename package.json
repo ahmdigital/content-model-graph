@@ -1,6 +1,6 @@
 {
   "name": "sanity-plugin-content-model-graph",
-  "version": "1.1.1",
+  "version": "1.2.1",
   "description": "Graph your Sanity.io content model straight in your Studio using this tool",
   "main": "lib/index.js",
   "repository": {
