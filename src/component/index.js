@@ -44,7 +44,7 @@ const handleSave = ({ content, fileType, mimeType }) => {
   FileSaver.saveAs(blob, `content-model.${fileType}`);
 };
 
-const ContentModelGraph = ({ Button, Switch, types }) => {
+function ContentModelGraph({ Button, Switch, types }) {
   const viz = new Viz({ Module, render });
   const [svgString, setSvgString] = useState('');
   const [isShowingFields, setIsShowingFields] = useState(false);
@@ -85,7 +85,7 @@ const ContentModelGraph = ({ Button, Switch, types }) => {
       />
     </Container>
   );
-};
+}
 
 ContentModelGraph.propTypes = {
   Button: PropTypes.elementType.isRequired,
