@@ -41,7 +41,7 @@
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-icons": "^3.11.0",
-    "styled-components": "^5.3.3",
+    "styled-components": "^6.0.0",
     "viz.js": "^2.1.2"
   },
   "peerDependencies": {
