@@ -1,5 +1,6 @@
 {
   "extends": "@ahmdigital/eslint-config/react-config",
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "jest/no-deprecated-functions": "off"
   }
