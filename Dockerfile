@@ -2,7 +2,7 @@ FROM node:16
 
 WORKDIR /root/app
 
-COPY package.json package-lock.json ./
+COPY package.json ./
 RUN npm ci --quiet --no-optional && \
     npm cache clean --force
 
