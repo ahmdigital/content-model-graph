@@ -1,14 +1,15 @@
 import { get } from 'lodash/fp';
+import { Module, render } from 'viz.js/full.render';
 import { useSchema } from 'sanity';
 import _ from 'lodash';
-import React, { Fragment, useState } from 'react';
+import FileSaver from 'file-saver';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-import { Button, Inline, Label, Switch } from '@sanity/ui';
+import Viz from 'viz.js';
 
 import getEdgesFromTypes from './utils/get-edges-from-types';
 import getNodesFromTypes from './utils/get-nodes-from-types';
-import FileSaver from 'file-saver';
+import ToolbarHeader from './sub-components/toolbar-header';
 
 const newLine = '\n';
 
@@ -37,19 +38,17 @@ const Wrapper = styled.div`
 
 const footer = ['}'];
 
-const handleSave = ({ content, fileType, mimeType }) => {
+const removeExplicitDimensions = (svgHtml) =>
+  _.replace(svgHtml, /width="(.*?)" height="(.*?)"/, 'width="100%" height="100%"');
+
+const handleSave = ({ content, fileType, mimeType }: { content: string; fileType: string; mimeType: string }) => {
   const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
   FileSaver.saveAs(blob, `content-model.${fileType}`);
 };
 
-const SwitchWithLabel = ({ checked, label, onChange }) => (
-  <Inline space={[2, 3]}>
-    <Switch checked={checked} label={label} onChange={onChange} />
-    <Label size={0}>{label}</Label>
-  </Inline>
-);
-
 export const ContentModelGraph = () => {
+  const viz = new Viz({ Module, render });
+
   const schema = useSchema();
   const types = get('_original.types', schema);
 
@@ -64,6 +63,10 @@ export const ContentModelGraph = () => {
 
   const graphVizString = _.invokeMap(allItems, 'join', newLine).join(newLine);
 
+  useEffect(() => {
+    viz.renderString(graphVizString).then(setSvgString).catch(setSvgString);
+  }, [viz, graphVizString]);
+
   const fileDefinitions = [
     { content: svgString, fileType: 'svg', mimeType: 'image/svg+xml' },
     {
@@ -75,27 +78,20 @@ export const ContentModelGraph = () => {
 
   return (
     <Container>
-      <h1>Content Model Graph</h1>
-      <SwitchWithLabel
-        checked={isShowingFields}
-        label='Show fields'
-        onChange={() => setIsShowingFields(!isShowingFields)}
+      <ToolbarHeader
+        fileDefinitions={fileDefinitions}
+        isShowingEdgeLabels={isShowingEdgeLabels}
+        isShowingFields={isShowingFields}
+        onChangeShowFields={() => setIsShowingFields(!isShowingFields)}
+        onChangeShowEdgeLabels={() => setIsShowingEdgeLabels(!isShowingEdgeLabels)}
+        onSaveClicked={handleSave}
       />
-      <SwitchWithLabel
-        checked={isShowingEdgeLabels}
-        label='Show edge labels'
-        onChange={() => setIsShowingEdgeLabels(!isShowingEdgeLabels)}
+      <Wrapper
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: removeExplicitDimensions(svgString),
+        }}
       />
-      {_.map(fileDefinitions, (item) => (
-        <Button
-          key={item.fileType}
-          type='button'
-          onClick={() => handleSave(item)}
-        >
-          Save .{item.fileType}
-        </Button>
-      ))}
-      <p>{JSON.stringify(types)}</p>
     </Container>
   );
 };
