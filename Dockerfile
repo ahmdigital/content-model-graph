@@ -14,4 +14,4 @@ COPY sanity.json .
 COPY tsconfig.dist.json .
 COPY tsconfig.json .
 COPY tsconfig.settings.json .
-COPY v2-incompatbile.js .
+COPY v2-incompatible.js .
