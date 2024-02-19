@@ -3,7 +3,7 @@ FROM node:16
 WORKDIR /root/app
 
 COPY package.json ./
-RUN npm ci --quiet --no-optional && \
+RUN npm i --quiet --no-optional && \
     npm cache clean --force
 
 COPY .eslintrc ./
