@@ -6,7 +6,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --quiet --no-optional && \
     npm cache clean --force
 
-COPY .eslintrc .babelrc ./
+COPY .eslintrc ./
 COPY src ./src
 COPY jest.config.js .
 COPY package.config.ts .
