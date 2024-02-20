@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-import { Type } from '../../types';
 import getNameForType from '../get-name-for-type';
 
 const toParameter = (key: any, value: any) => (value ? `${key}="${value}"` : '');
