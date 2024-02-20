@@ -68,20 +68,20 @@ const getReferences = ({
 
 const buildFieldToEdges =
   ({ fromType, isShowingEdgeLabels }: { fromType: any; isShowingEdgeLabels: boolean }) =>
-  (field: any) => {
-    const label = isShowingEdgeLabels ? getNameForType(field) : undefined;
-    const from = `"${fromType}":${field.name}`;
-    return [
-      getUnusualInlinedFieldType({ field, from }),
-      getReferences({ arrowHead: 'tee', from, label, values: field.to }),
-      getReferences({ arrowHead: 'crow', from, label, values: field.of }),
-    ];
-  };
+    (field: any) => {
+      const label = isShowingEdgeLabels ? getNameForType(field) : undefined;
+      const from = `"${fromType}":${field.name}`;
+      return [
+        getUnusualInlinedFieldType({ field, from }),
+        getReferences({ arrowHead: 'tee', from, label, values: field.to }),
+        getReferences({ arrowHead: 'crow', from, label, values: field.of }),
+      ];
+    };
 
 const typeToEdges = ({ isShowingEdgeLabels, type }: { isShowingEdgeLabels: boolean; type: any }) =>
   _.map(type.fields, buildFieldToEdges({ fromType: type.name, isShowingEdgeLabels }));
 
-const getEdgesFromTypes = (types: Array<Type>, isShowingEdgeLabels: boolean = false): any[] =>
+const getEdgesFromTypes = (types: any, isShowingEdgeLabels: boolean = false): any[] =>
   _(types)
     .map((type) => typeToEdges({ isShowingEdgeLabels, type }))
     .flattenDeep()

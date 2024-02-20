@@ -1,6 +1,7 @@
 export type Field = {
   name: string;
-  title?: string;
+  to: Array<object>;
+  type: string;
 };
 
 export type Type = {

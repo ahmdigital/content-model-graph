@@ -14,7 +14,6 @@ const typeToNode = (isShowingFields: boolean) => (type: Type) =>
       `<tr><td align="left" border="0" bgcolor="white" port="${field.name}">${getNameForType(field)}</td></tr>`,
   ).join('')}</table></font>> shape="none"]`;
 
-const getNodesFromTypes = (types: Array<Type>, isShowingFields: boolean): string[] =>
-  _.map(types, typeToNode(isShowingFields));
+const getNodesFromTypes = (types: any, isShowingFields: boolean): string[] => _.map(types, typeToNode(isShowingFields));
 
 export default getNodesFromTypes;
