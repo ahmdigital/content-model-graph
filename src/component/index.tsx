@@ -1,9 +1,10 @@
 import { get } from 'lodash/fp';
+// @ts-ignore - It's complaining about typings here, but it's fine
 import { Module, render } from 'viz.js/full.render';
+import { useEffect, useState } from 'react';
 import { useSchema } from 'sanity';
 import _ from 'lodash';
 import FileSaver from 'file-saver';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Viz from 'viz.js';
 
@@ -38,7 +39,7 @@ const Wrapper = styled.div`
 
 const footer = ['}'];
 
-const removeExplicitDimensions = (svgHtml) =>
+const removeExplicitDimensions = (svgHtml: string) =>
   _.replace(svgHtml, /width="(.*?)" height="(.*?)"/, 'width="100%" height="100%"');
 
 const handleSave = ({ content, fileType, mimeType }: { content: string; fileType: string; mimeType: string }) => {
@@ -47,8 +48,6 @@ const handleSave = ({ content, fileType, mimeType }: { content: string; fileType
 };
 
 export const ContentModelGraph = () => {
-  const viz = new Viz({ Module, render });
-
   const schema = useSchema();
   const types = get('_original.types', schema);
 
@@ -64,8 +63,9 @@ export const ContentModelGraph = () => {
   const graphVizString = _.invokeMap(allItems, 'join', newLine).join(newLine);
 
   useEffect(() => {
+    const viz = new Viz({ Module, render });
     viz.renderString(graphVizString).then(setSvgString).catch(setSvgString);
-  }, [viz, graphVizString]);
+  }, [graphVizString]);
 
   const fileDefinitions = [
     { content: svgString, fileType: 'svg', mimeType: 'image/svg+xml' },
