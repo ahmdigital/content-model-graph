@@ -4,9 +4,9 @@ import { Field, Type } from '../../types';
 
 type FieldOrType = Field | Type;
 
-const getNameForType = (type: FieldOrType): string => {
+const getNameForType = (type: FieldOrType): string | undefined => {
   if ('title' in type) {
-    return type.title ?? '';
+    return type.title;
   }
 
   return startCase(type.name);
