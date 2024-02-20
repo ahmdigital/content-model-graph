@@ -1,10 +1,7 @@
 import { startCase } from 'lodash/fp';
 
-type Type = {
-  name: string;
-  title?: string;
-};
+import { Field } from '../../types';
 
-const getNameForType = (type: Type): string => type.title || startCase(type.name);
+const getNameForType = (type: Field): string => type.title || startCase(type.name);
 
 export default getNameForType;

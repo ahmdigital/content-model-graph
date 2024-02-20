@@ -3,8 +3,22 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [
+    "cms",
+    "content-model",
+    "content",
+    "graph",
+    "graph",
+    "graphing",
+    "headless",
+    "modelling",
+    "realtime",
+    "sanity-io",
+    "sanity-plugin",
+    "sanity-tool",
     "sanity",
-    "sanity-plugin"
+    "tool",
+    "visualisation",
+    "vizualisation"
   ],
   "homepage": "https://github.com/ahmdigital/content-model-graph#readme",
   "bugs": {
