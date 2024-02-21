@@ -1,7 +1,42 @@
 {
-  "extends": "@ahmdigital/eslint-config/react-config",
-  "parser": "@typescript-eslint/parser",
+  "root": true,
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "extends": [
+    "@ahmdigital/eslint-config/ts-config",
+    "@ahmdigital/eslint-config/react-config",
+    "sanity",
+    "sanity/typescript",
+    "sanity/react",
+    "plugin:import/typescript",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/jsx-runtime"
+  ],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
-    "jest/no-deprecated-functions": "off"
+    "jsdoc/require-param-type": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never",
+        "mjs": "never"
+      }
+    ]
   }
 }

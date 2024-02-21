@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/prefer-default-export
-export const types = [
+const types = [
   {
     fields: [
       {
@@ -52,3 +51,5 @@ export const types = [
     type: 'document',
   },
 ];
+
+export default types;

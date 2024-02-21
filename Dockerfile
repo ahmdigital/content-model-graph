@@ -1,10 +1,19 @@
 FROM node:16
 
-WORKDIR /root/app
+WORKDIR /var/app
 
-COPY package.json package-lock.json ./
-RUN npm ci --quiet --no-optional && \
-  npm cache clean --force
+COPY .eslintignore .
+COPY .eslintrc .
+COPY package-lock.json .
+COPY package.json .
+COPY package.config.ts .
 
-COPY .eslintrc .babelrc ./
+RUN npm install
+
 COPY src ./src
+COPY sanity.json .
+COPY jest.config.js .
+COPY tsconfig.dist.json .
+COPY tsconfig.json .
+COPY tsconfig.settings.json .
+COPY v2-incompatible.js .

@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import getNameForType from '../get-name-for-type';
 
-const toParameter = (key, value) => (value ? `${key}="${value}"` : '');
+const toParameter = (key: any, value: any) => (value ? `${key}="${value}"` : '');
 
 const builtInFieldTypes = [
   'array',
@@ -20,9 +20,19 @@ const builtInFieldTypes = [
   'url',
 ];
 
-const ensureArray = (values) => (_.isArray(values) ? values : [values]);
+const ensureArray = (values: any) => (_.isArray(values) ? values : [values]);
 
-const buildEdge = ({ arrowHead, from, label, to }) => {
+const buildEdge = ({
+  arrowHead,
+  from,
+  label,
+  to,
+}: {
+  arrowHead: string;
+  from: string;
+  label: string | undefined;
+  to: string;
+}) => {
   if (_.includes(builtInFieldTypes, to)) {
     return null;
   }
@@ -32,10 +42,20 @@ const buildEdge = ({ arrowHead, from, label, to }) => {
   ].join(' ')}]`;
 };
 
-const getUnusualInlinedFieldType = ({ field, from }) =>
+const getUnusualInlinedFieldType = ({ field, from }: { field: any; from: string }) =>
   buildEdge({ arrowHead: 'dot', from, label: undefined, to: field.type });
 
-const getReferences = ({ arrowHead, from, label, values }) =>
+const getReferences = ({
+  arrowHead,
+  from,
+  label,
+  values,
+}: {
+  arrowHead: string;
+  from: string;
+  label: string | undefined;
+  values: any;
+}): any =>
   _.map(_.compact(ensureArray(values)), ({ type, to }) => {
     if (type === 'reference') {
       return _.map(_.compact(ensureArray(to)), (toItem) =>
@@ -46,8 +66,8 @@ const getReferences = ({ arrowHead, from, label, values }) =>
   });
 
 const buildFieldToEdges =
-  ({ fromType, isShowingEdgeLabels }) =>
-  (field) => {
+  ({ fromType, isShowingEdgeLabels }: { fromType: any; isShowingEdgeLabels: boolean }) =>
+  (field: any) => {
     const label = isShowingEdgeLabels ? getNameForType(field) : undefined;
     const from = `"${fromType}":${field.name}`;
     return [
@@ -57,10 +77,10 @@ const buildFieldToEdges =
     ];
   };
 
-const typeToEdges = ({ isShowingEdgeLabels, type }) =>
+const typeToEdges = ({ isShowingEdgeLabels, type }: { isShowingEdgeLabels: boolean; type: any }) =>
   _.map(type.fields, buildFieldToEdges({ fromType: type.name, isShowingEdgeLabels }));
 
-const getEdgesFromTypes = (types, isShowingEdgeLabels) =>
+const getEdgesFromTypes = (types: any, isShowingEdgeLabels: boolean = false): any[] =>
   _(types)
     .map((type) => typeToEdges({ isShowingEdgeLabels, type }))
     .flattenDeep()

@@ -1,13 +1,16 @@
+import { get } from 'lodash/fp';
+// @ts-ignore - It's complaining about typings here, but it's fine
 import { Module, render } from 'viz.js/full.render';
+import { useEffect, useState } from 'react';
+import { useSchema } from 'sanity';
 import _ from 'lodash';
 import FileSaver from 'file-saver';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
 import styled from 'styled-components';
 import Viz from 'viz.js';
 
 import getEdgesFromTypes from './utils/get-edges-from-types';
 import getNodesFromTypes from './utils/get-nodes-from-types';
+import ToolbarHeader from './sub-components/toolbar-header';
 
 const newLine = '\n';
 
@@ -36,16 +39,18 @@ const Wrapper = styled.div`
 
 const footer = ['}'];
 
-const removeExplicitDimensions = (svgHtml) =>
+const removeExplicitDimensions = (svgHtml: string) =>
   _.replace(svgHtml, /width="(.*?)" height="(.*?)"/, 'width="100%" height="100%"');
 
-const handleSave = ({ content, fileType, mimeType }) => {
+const handleSave = ({ content, fileType, mimeType }: { content: string; fileType: string; mimeType: string }) => {
   const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
   FileSaver.saveAs(blob, `content-model.${fileType}`);
 };
 
-function ContentModelGraph({ Button, Switch, types }) {
-  const viz = new Viz({ Module, render });
+export const ContentModelGraph = () => {
+  const schema = useSchema();
+  const types = get('_original.types', schema);
+
   const [svgString, setSvgString] = useState('');
   const [isShowingFields, setIsShowingFields] = useState(false);
   const [isShowingEdgeLabels, setIsShowingEdgeLabels] = useState(false);
@@ -57,26 +62,30 @@ function ContentModelGraph({ Button, Switch, types }) {
 
   const graphVizString = _.invokeMap(allItems, 'join', newLine).join(newLine);
 
-  viz.renderString(graphVizString).then(setSvgString).catch(setSvgString);
+  useEffect(() => {
+    const viz = new Viz({ Module, render });
+    viz.renderString(graphVizString).then(setSvgString).catch(setSvgString);
+  }, [graphVizString]);
 
   const fileDefinitions = [
     { content: svgString, fileType: 'svg', mimeType: 'image/svg+xml' },
-    { content: graphVizString, fileType: 'gv', mimeType: 'application/octet-stream' },
+    {
+      content: graphVizString,
+      fileType: 'gv',
+      mimeType: 'application/octet-stream',
+    },
   ];
+
   return (
     <Container>
-      <h1>Content Model Graph</h1>
-      <Switch checked={isShowingFields} label="Show fields" onChange={() => setIsShowingFields(!isShowingFields)} />
-      <Switch
-        checked={isShowingEdgeLabels}
-        label="Show edge labels"
-        onChange={() => setIsShowingEdgeLabels(!isShowingEdgeLabels)}
+      <ToolbarHeader
+        fileDefinitions={fileDefinitions}
+        isShowingEdgeLabels={isShowingEdgeLabels}
+        isShowingFields={isShowingFields}
+        onChangeShowFields={() => setIsShowingFields(!isShowingFields)}
+        onChangeShowEdgeLabels={() => setIsShowingEdgeLabels(!isShowingEdgeLabels)}
+        onSaveClicked={handleSave}
       />
-      {_.map(fileDefinitions, (item) => (
-        <Button key={item.fileType} type="button" onClick={() => handleSave(item)}>
-          Save .{item.fileType}
-        </Button>
-      ))}
       <Wrapper
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
@@ -85,12 +94,6 @@ function ContentModelGraph({ Button, Switch, types }) {
       />
     </Container>
   );
-}
-
-ContentModelGraph.propTypes = {
-  Button: PropTypes.elementType.isRequired,
-  Switch: PropTypes.elementType.isRequired,
-  types: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
 };
 
 export default ContentModelGraph;

@@ -1,13 +1,26 @@
-# Content Model Graph
+# sanity-plugin-content-model-graph
 
-[![Codeship Status for ahmdigital/content-model-graph](https://app.codeship.com/projects/114f2570-022a-0138-b1be-367aa528a0e6/status?branch=master)](https://app.codeship.com/projects/378236)
-
-Graph your Sanity.io content model straight in your Studio using this tool
+> This is a **Sanity Studio v3** plugin.
 
 ## Installation
 
-1. `sanity install content-model-graph`
-2. There's no step 2.
+```sh
+npm install sanity-plugin-content-model-graph
+```
+
+## Usage
+
+Add it as a plugin in `sanity.config.ts` (or .js):
+
+```ts
+import { defineConfig } from "sanity";
+import { myPlugin } from "sanity-plugin-content-model-graph";
+
+export default defineConfig({
+  //...
+  plugins: [myPlugin({})],
+});
+```
 
 ## Examples (need updating, it looks nicer now)
 
@@ -21,12 +34,14 @@ Graph your Sanity.io content model straight in your Studio using this tool
 ![Screen Shot 2019-11-16 at 11 52 00 pm](https://user-images.githubusercontent.com/4197647/68993455-77886700-08cc-11ea-8a5c-1653d44fee07.png)
 ![Screen Shot 2019-11-16 at 11 52 12 pm](https://user-images.githubusercontent.com/4197647/68993452-77886700-08cc-11ea-8426-02447b894b9f.png)
 
-## Contributing
+## License
 
-Yes, please!
+[MIT](LICENSE) © ahm Digital
 
-Repo still needs a way of running locally without a studio, but for now use `npm link` and develop it against your own studio.
+## Develop & test
 
-Will add a CD integration to npm if this takes off. For now we at least have CI for lint.
+This plugin uses [@sanity/plugin-kit](https://github.com/sanity-io/plugin-kit)
+with default configuration for build & watch scripts.
 
-*NOTE:* This repo is manually released for now.
+See [Testing a plugin in Sanity Studio](https://github.com/sanity-io/plugin-kit#testing-a-plugin-in-sanity-studio)
+on how to run this plugin with hotreload in the studio.
